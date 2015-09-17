@@ -3,7 +3,7 @@
 var TestHelper = require('../../TestHelper');
 var coreModule = require('../../../lib/core');
 
-/* global bootstrapViewer, bootstrapModeler, inject */
+/* global bootstrapViewer, inject */
 
 var testModules = [ coreModule ];
 
@@ -258,5 +258,130 @@ describe('draw - cmmn renderer', function() {
     });
 
   });
+
+  describe('planning table collapsed/expanded', function () {
+
+    describe('stage contains expanded planning table', function() {
+
+      var xml = require('../../fixtures/cmmn/renderer/stage-expanded-planning-table.cmmn');
+
+      beforeEach(bootstrapViewer(xml, { modules: testModules }));
+
+      it('should depict discretionary', inject(function(elementRegistry) {
+        var element = elementRegistry.get('DIS_HumanTask_1');
+        expect(element.hidden).to.equal(false);
+      }));
+
+    });
+
+
+    describe('stage contains collapsed planning table', function() {
+
+      var xml = require('../../fixtures/cmmn/renderer/stage-collapsed-planning-table.cmmn');
+
+      beforeEach(bootstrapViewer(xml, { modules: testModules }));
+
+      it('should not depict discretionary', inject(function(elementRegistry) {
+        var element = elementRegistry.get('DIS_HumanTask_1');
+        expect(element.hidden).to.equal(true);
+      }));
+
+    });
+
+ 
+    describe('plan item contains expanded planning table', function() {
+
+      var xml = require('../../fixtures/cmmn/renderer/plan-item-expanded-planning-table.cmmn');
+
+      beforeEach(bootstrapViewer(xml, { modules: testModules }));
+
+      it('should depict discretionary', inject(function(elementRegistry) {
+        var element = elementRegistry.get('DIS_HumanTask_2');
+        var connection = elementRegistry.get('Connection_1');
+
+        expect(element.hidden).to.equal(false);
+        expect(connection.hidden).to.equal(false);
+      }));
+
+    });
+
+ 
+    describe('plan item contains collapsed planning table', function() {
+
+      var xml = require('../../fixtures/cmmn/renderer/plan-item-collapsed-planning-table.cmmn');
+
+      beforeEach(bootstrapViewer(xml, { modules: testModules }));
+
+      it('should not depict discretionary', inject(function(elementRegistry) {
+        var element = elementRegistry.get('DIS_HumanTask_2');
+        var connection = elementRegistry.get('Connection_1');
+
+        expect(element.hidden).to.equal(true);
+        expect(connection.hidden).to.equal(true);
+      }));
+
+    });
+
+ 
+    describe('discretionary item contains expanded planning table', function() {
+
+      var xml = require('../../fixtures/cmmn/renderer/discretionary-item-expanded-planning-table.cmmn');
+
+      beforeEach(bootstrapViewer(xml, { modules: testModules }));
+
+      it('should depict discretionary', inject(function(elementRegistry) {
+        var element1 = elementRegistry.get('DIS_HumanTask_1');
+        var element2 = elementRegistry.get('DIS_HumanTask_2');
+        var connection = elementRegistry.get('Connection_1');
+
+        expect(element1.hidden).to.equal(false);
+        expect(element2.hidden).to.equal(false);
+        expect(connection.hidden).to.equal(false);
+      }));
+
+    });
+
+
+    describe('discretionary item contains collapsed planning table', function() {
+
+      var xml = require('../../fixtures/cmmn/renderer/discretionary-item-collapsed-planning-table.cmmn');
+
+      beforeEach(bootstrapViewer(xml, { modules: testModules }));
+
+      it('should not depict discretionary', inject(function(elementRegistry) {
+        var element1 = elementRegistry.get('DIS_HumanTask_1');
+        var element2 = elementRegistry.get('DIS_HumanTask_2');
+        var connection = elementRegistry.get('Connection_1');
+
+        expect(element1.hidden).to.equal(false);
+        expect(element2.hidden).to.equal(true);
+        expect(connection.hidden).to.equal(true);
+      }));
+
+    });
+
+
+   describe('two plan items references the same definition containing a planning table', function() {
+
+      var xml = require('../../fixtures/cmmn/renderer/plan-items-same-definition-with-planning-table.cmmn');
+
+      beforeEach(bootstrapViewer(xml, { modules: testModules }));
+
+      it('should not depict discretionary', inject(function(elementRegistry) {
+        var element = elementRegistry.get('DIS_HumanTask_2');
+        
+        var connection1 = elementRegistry.get('Connection_1');
+        var connection2 = elementRegistry.get('Connection_2');
+
+
+        expect(element.hidden).to.equal(false);
+        expect(connection1.hidden).to.equal(true);
+        expect(connection2.hidden).to.equal(false);
+      }));
+
+    });
+
+  });
+
 
 });
