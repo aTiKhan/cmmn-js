@@ -23,7 +23,7 @@ describe('Modeler', function() {
   }
 
 
-  it('should import complex', function(done) {
+  it.only('should import complex', function(done) {
     var xml = require('../fixtures/cmmn/complex.cmmn');
     createModeler(xml, done);
   });
