@@ -89,14 +89,20 @@ describe('Modeler', function() {
 
         dragging.move(canvasEvent({ x: 480, y: 300 }));
 
+
         dragging.hover({
           element: target,
           gfx: targetGfx
         });
 
-        window.foo = 1;
 
+        console.log('canExecute POST HOVER', dragging.context().data.context.canExecute);
+
+        window.foo = 1;
         dragging.move(canvasEvent({ x: 500, y: 240 }));
+        window.foo = 0;
+
+        console.log('canExecute POST MOVE', dragging.context().data.context.canExecute);
 
         dragging.end();
 
