@@ -29,7 +29,7 @@ describe('Modeler', function() {
   });
 
 
-  it('should re-import simple diagram', function(done) {
+  it.only('should re-import simple diagram', function(done) {
 
     var xml = require('../fixtures/cmmn/simple.cmmn');
 
