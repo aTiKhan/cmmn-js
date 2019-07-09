@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cmmn:definitions xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC" xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:cmmn="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_16rch2r" targetNamespace="http://bpmn.io/schema/cmmn" exporter="Camunda Modeler" exporterVersion="3.1.0">
+  <cmmn:case id="Case_0cl56a5">
+    <cmmn:casePlanModel id="CasePlanModel_1pbhbwc" name="A CasePlanModel">
+      <cmmn:planItem id="PlanItem_A" definitionRef="A">
+        <cmmn:entryCriterion id="EntryCriterion" sentryRef="Sentry" />
+      </cmmn:planItem>
+      <cmmn:planItem id="PlanItem_B" definitionRef="B" />
+      <cmmn:sentry id="Sentry" />
+      <cmmn:task id="A" name="A" />
+      <cmmn:task id="B" name="B" />
+    </cmmn:casePlanModel>
+  </cmmn:case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="CMMNDiagram_0m2r1hp">
+      <cmmndi:Size width="500" height="500" />
+      <cmmndi:CMMNShape id="DI_CasePlanModel_1pbhbwc" cmmnElementRef="CasePlanModel_1pbhbwc">
+        <dc:Bounds x="154" y="99" width="534" height="389" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_A_di" cmmnElementRef="PlanItem_A">
+        <dc:Bounds x="237" y="160" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="EntryCriterion_di" cmmnElementRef="EntryCriterion">
+        <dc:Bounds x="327" y="187" width="20" height="28" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="PlanItem_B_di" cmmnElementRef="PlanItem_B">
+        <dc:Bounds x="462" y="230" width="100" height="80" />
+        <cmmndi:CMMNLabel />
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</cmmn:definitions>

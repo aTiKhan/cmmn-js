@@ -23,13 +23,90 @@ describe('Modeler', function() {
   }
 
 
-  it.only('should import complex', function(done) {
+  it('should import complex', function(done) {
     var xml = require('../fixtures/cmmn/complex.cmmn');
     createModeler(xml, done);
   });
 
 
-  it.only('should re-import simple diagram', function(done) {
+  var createEvent = require('../util/MockEvents').createEvent;
+
+  var assign = require('min-dash').assign;
+
+  function createCanvasEvent(modeler, position, data) {
+
+    var canvas = modeler.get('canvas');
+
+    var target = canvas._svg;
+
+    var clientRect = canvas._container.getBoundingClientRect();
+
+    var absolutePosition = {
+      x: position.x + clientRect.left,
+      y: position.y + clientRect.top
+    };
+
+    data = assign({
+      target: target,
+      x: position.x,
+      y: position.y,
+      clientX: position.x,
+      clientY: position.y,
+      offsetX: position.x,
+      offsetY: position.y
+    }, data || {});
+
+    return modeler.get('eventBus').createEvent(data);
+  }
+
+
+  it.only('should import foo', function(done) {
+    var xml = require('./foo.cmmn');
+
+    createModeler(xml, function(_0, _1, modeler) {
+
+      var connect = modeler.get('connect');
+      var dragging = modeler.get('dragging');
+      var elementRegistry = modeler.get('elementRegistry');
+      var canvas = modeler.get('canvas');
+      var eventBus = modeler.get('eventBus');
+
+      dragging.setOptions({ manual: true });
+
+      var source = elementRegistry.get('EntryCriterion');
+      var target = elementRegistry.get('PlanItem_B');
+      var targetGfx = canvas.getGraphics(target);
+
+      function canvasEvent(pos) {
+        return createCanvasEvent(modeler, pos);
+      }
+
+      connect.start(canvasEvent({ x: 327, y: 187 }), source);
+
+      dragging.move(canvasEvent({ x: 480, y: 300 }));
+
+      dragging.hover({
+        element: target,
+        gfx: targetGfx
+      });
+
+      window.foo = 1;
+
+      dragging.move(canvasEvent({ x: 500, y: 240 }));
+
+      dragging.end();
+
+      done();
+    });
+  });
+
+  it('should import simple', function(done) {
+    var xml = require('../fixtures/cmmn/simple.cmmn');
+    createModeler(xml, done);
+  });
+
+
+  it('should re-import simple diagram', function(done) {
 
     var xml = require('../fixtures/cmmn/simple.cmmn');
 
