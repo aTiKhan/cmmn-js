@@ -65,39 +65,46 @@ describe('Modeler', function() {
 
     createModeler(xml, function(_0, _1, modeler) {
 
-      var connect = modeler.get('connect');
-      var dragging = modeler.get('dragging');
-      var elementRegistry = modeler.get('elementRegistry');
-      var canvas = modeler.get('canvas');
-      var eventBus = modeler.get('eventBus');
+      setTimeout(function() {
 
-      dragging.setOptions({ manual: true });
+        window.foo = 0;
 
-      var source = elementRegistry.get('EntryCriterion');
-      var target = elementRegistry.get('PlanItem_B');
-      var targetGfx = canvas.getGraphics(target);
+        var connect = modeler.get('connect');
+        var dragging = modeler.get('dragging');
+        var elementRegistry = modeler.get('elementRegistry');
+        var canvas = modeler.get('canvas');
+        var eventBus = modeler.get('eventBus');
 
-      function canvasEvent(pos) {
-        return createCanvasEvent(modeler, pos);
-      }
+        dragging.setOptions({ manual: true });
 
-      connect.start(canvasEvent({ x: 327, y: 187 }), source);
+        var source = elementRegistry.get('EntryCriterion');
+        var target = elementRegistry.get('PlanItem_B');
+        var targetGfx = canvas.getGraphics(target);
 
-      dragging.move(canvasEvent({ x: 480, y: 300 }));
+        function canvasEvent(pos) {
+          return createCanvasEvent(modeler, pos);
+        }
 
-      dragging.hover({
-        element: target,
-        gfx: targetGfx
-      });
+        connect.start(canvasEvent({ x: 327, y: 187 }), source);
 
-      window.foo = 1;
+        dragging.move(canvasEvent({ x: 480, y: 300 }));
 
-      dragging.move(canvasEvent({ x: 500, y: 240 }));
+        dragging.hover({
+          element: target,
+          gfx: targetGfx
+        });
 
-      dragging.end();
+        window.foo = 1;
 
-      done();
+        dragging.move(canvasEvent({ x: 500, y: 240 }));
+
+        dragging.end();
+
+        done();
+      }, 0);
+
     });
+
   });
 
   it('should import simple', function(done) {
