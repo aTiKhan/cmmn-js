@@ -6,6 +6,21 @@ All notable changes to [cmmn-js](https://github.com/bpmn-io/cmmn-js) are documen
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.19.2
+
+* `FIX`: es5ify
+
+## 0.19.1
+
+* `FIX`: provide missing `connection.updateWaypoints` rule
+
+## 0.19.0
+
+* `FEAT`: improve connect snapping
+* `FEAT`: snap to source and target dockings
+* `FEAT`: add connect previews
+* `CHORE`: bump to `diagram-js@4.0.1`
+
 ## 0.18.1
 
 * `FIX`: prevent HTML injection in search
